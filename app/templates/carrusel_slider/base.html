@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Slider Creativo | Flask</title>
+
+    <!-- Tailwind CSS 4 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/carrusel.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <!-- Fondo decorativo -->
+    <div class="fondo-decorativo"></div>
+
+
+    <main class="min-h-screen flex flex-col items-center justify-center px-4 py-10">
+
+        <!-- ENCABEZADO -->
+        <section class="text-center mb-10 max-w-3xl">
+
+            <span class="etiqueta">
+                PROYECTO FLASK
+            </span>
+
+            <h1 class="titulo-principal">
+                Slider de Imágenes
+            </h1>
+
+            <p class="subtitulo">
+                Un carrusel interactivo desarrollado con Flask,
+                Tailwind CSS 4, CSS y JavaScript.
+            </p>
+
+        </section>
+
+
+        <!-- CARRUSEL -->
+        <section class="slider-contenedor">
+
+            <div class="slider">
+
+                <!-- IMÁGENES -->
+                <div class="slides">
+
+                    {% for imagen in imagenes %}
+
+                    <article class="slide {% if loop.first %}activo{% endif %}">
+
+                        <img
+                            src="{{ url_for('static', filename='img/' ~ imagen.archivo) }}"
+                            alt="{{ imagen.titulo }}"
+                        >
+
+                        <div class="overlay"></div>
+
+
+                        <!-- CONTENIDO -->
+                        <div class="contenido-slide">
+
+                            <span class="numero-slide">
+                                {{ "%02d"|format(loop.index) }}
+                                /
+                                {{ "%02d"|format(imagenes|length) }}
+                            </span>
+
+                            <h2>
+                                {{ imagen.titulo }}
+                            </h2>
+
+                            <p>
+                                {{ imagen.descripcion }}
+                            </p>
+
+                            <button class="btn-explorar">
+                                Explorar
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- BOTÓN ANTERIOR -->
+                <button
+                    class="btn-slider btn-anterior"
+                    id="btnAnterior"
+                    type="button"
+                    aria-label="Imagen anterior"
+                >
+                    &#10094;
+                </button>
+
+
+                <!-- BOTÓN SIGUIENTE -->
+                <button
+                    class="btn-slider btn-siguiente"
+                    id="btnSiguiente"
+                    type="button"
+                    aria-label="Imagen siguiente"
+                >
+                    &#10095;
+                </button>
+
+
+                <!-- INDICADORES -->
+                <div class="indicadores">
+
+                    {% for imagen in imagenes %}
+
+                    <button
+                        class="indicador {% if loop.first %}activo{% endif %}"
+                        data-slide="{{ loop.index0 }}"
+                        type="button"
+                        aria-label="Ir a la imagen {{ loop.index }}"
+                    ></button>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- BARRA DE PROGRESO -->
+                <div class="progreso-contenedor">
+
+                    <div
+                        class="progreso"
+                        id="barraProgreso"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMACIÓN -->
+            <div class="informacion-slider">
+
+                <p class="texto-informacion">
+                    Navega automáticamente o utiliza los controles.
+                </p>
+
+
+                <button
+                    id="btnPausar"
+                    class="btn-pausar"
+                    type="button"
+                >
+
+                    <span id="iconoPausa">
+                        ❚❚
+                    </span>
+
+                    <span id="textoPausa">
+                        Pausar
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- TARJETAS -->
+        <section class="caracteristicas">
+
+            <article class="tarjeta">
+
+                <div class="icono">⚡</div>
+
+                <h3>Dinámico</h3>
+
+                <p>
+                    Transiciones fluidas entre las imágenes.
+                </p>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">🎨</div>
+
+                <h3>Personalizado</h3>
+
+                <p>
+                    Diseño moderno utilizando CSS y Tailwind.
+                </p>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">⌨️</div>
+
+                <h3>Interactivo</h3>
+
+                <p>
+                    Navega utilizando botones o el teclado.
+                </p>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script
+        src="{{ url_for('static', filename='js/carrusel.js') }}"
+    ></script>
+
+</body>
+
+</html>

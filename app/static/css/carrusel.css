@@ -1,0 +1,456 @@
+.slider-contenedor {
+    width: min(1100px, 100%);
+}
+
+
+/* ===============================
+   SLIDER
+================================ */
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 28px;
+    background: #18181b;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ===============================
+   SLIDES
+================================ */
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: scale(1.08);
+
+    transition:
+        opacity 0.8s ease,
+        transform 1.2s ease,
+        visibility 0.8s ease;
+}
+
+
+/* IMAGEN ACTIVA */
+
+.slide.activo {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 1;
+}
+
+
+.slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ===============================
+   OVERLAY
+================================ */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.05)
+    );
+
+    z-index: 2;
+}
+
+
+/* ===============================
+   CONTENIDO
+================================ */
+
+.contenido-slide {
+    position: absolute;
+
+    left: 7%;
+    bottom: 15%;
+
+    max-width: 550px;
+
+    z-index: 3;
+
+    color: white;
+
+    animation: aparecerContenido 1s ease;
+}
+
+
+.numero-slide {
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    font-size: 13px;
+    letter-spacing: 3px;
+
+    color: #c4b5fd;
+}
+
+
+.contenido-slide h2 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    margin-bottom: 20px;
+
+    color: white;
+}
+
+
+.contenido-slide p {
+    max-width: 500px;
+
+    font-size: 16px;
+    line-height: 1.8;
+
+    color: #e4e4e7;
+
+    margin-bottom: 25px;
+}
+
+
+.btn-explorar {
+    padding: 14px 28px;
+
+    border: none;
+    border-radius: 50px;
+
+    color: white;
+
+    font-family: inherit;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    background: linear-gradient(
+        90deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.btn-explorar:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 30px rgba(99, 102, 241, 0.4);
+}
+
+
+/* ===============================
+   BOTONES DE NAVEGACIÓN
+================================ */
+
+.btn-slider {
+    position: absolute;
+
+    top: 50%;
+
+    width: 55px;
+    height: 55px;
+
+    transform: translateY(-50%);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    background: rgba(0, 0, 0, 0.3);
+
+    backdrop-filter: blur(10px);
+
+    z-index: 10;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.btn-slider:hover {
+    background: rgba(99, 102, 241, 0.8);
+
+    transform:
+        translateY(-50%)
+        scale(1.1);
+}
+
+
+.btn-anterior {
+    left: 25px;
+}
+
+
+.btn-siguiente {
+    right: 25px;
+}
+
+
+/* ===============================
+   INDICADORES
+================================ */
+
+.indicadores {
+    position: absolute;
+
+    left: 50%;
+    bottom: 30px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+}
+
+
+.indicador {
+    width: 9px;
+    height: 9px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    background: rgba(255, 255, 255, 0.5);
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.indicador.activo {
+    width: 35px;
+
+    border-radius: 10px;
+
+    background: white;
+}
+
+
+/* ===============================
+   BARRA DE PROGRESO
+================================ */
+
+.progreso-contenedor {
+    position: absolute;
+
+    width: 100%;
+    height: 4px;
+
+    left: 0;
+    bottom: 0;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    z-index: 20;
+}
+
+
+.progreso {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #6366f1,
+        #c084fc
+    );
+
+    transition: width 0.1s linear;
+}
+
+
+/* ===============================
+   INFORMACIÓN INFERIOR
+================================ */
+
+.informacion-slider {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 20px 5px;
+}
+
+
+.texto-informacion {
+    font-size: 14px;
+
+    color: #a1a1aa;
+}
+
+
+.btn-pausar {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 50px;
+
+    color: white;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    transition: background 0.3s ease;
+}
+
+
+.btn-pausar:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* ===============================
+   ANIMACIÓN
+================================ */
+
+@keyframes aparecerContenido {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media screen and (max-width: 768px) {
+
+    .slider {
+        height: 500px;
+        border-radius: 20px;
+    }
+
+
+    .contenido-slide {
+        left: 8%;
+        right: 8%;
+        bottom: 20%;
+    }
+
+
+    .contenido-slide h2 {
+        font-size: 2.3rem;
+    }
+
+
+    .btn-slider {
+        width: 45px;
+        height: 45px;
+
+        font-size: 20px;
+    }
+
+
+    .btn-anterior {
+        left: 12px;
+    }
+
+
+    .btn-siguiente {
+        right: 12px;
+    }
+
+
+    .informacion-slider {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+
+@media screen and (max-width: 480px) {
+
+    .slider {
+        height: 460px;
+    }
+
+
+    .contenido-slide p {
+        font-size: 14px;
+    }
+
+
+    .indicadores {
+        gap: 7px;
+    }
+
+
+    .indicador.activo {
+        width: 25px;
+    }
+
+}
